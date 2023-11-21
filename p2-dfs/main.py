@@ -1,5 +1,4 @@
-from models.labyrinthe import Labyrinthe
-from models.player import Player
+from models import *
 
 from sys import exit
 

@@ -1,5 +1,4 @@
 from .case import Case
-from .player import Player
 
 from typing import List
 
@@ -24,7 +23,7 @@ class Labyrinthe:
         self.goal_y = y
         self.board[x][y].goal = True
 
-    def show(self, player: Player) -> None:
+    def show(self, player) -> None:
         for i in range(self.max_y+1):
             cases = []
             for column in self.board:
