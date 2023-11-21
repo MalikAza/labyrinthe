@@ -41,3 +41,9 @@ class Labyrinthe:
             print(message)
 
         print(f"\nPlayer steps: [{player.steps}]")
+
+    def get_goal_coordinates(self) -> 'Coordinates':
+        return {
+            'x': self.goal_x,
+            'y': self.goal_y
+        }

@@ -1,5 +1,5 @@
-from models.case import Case
+from models.direction import Direction
 
 class BadDirection(Exception):
-    "The direction must be one of these: " + ','.join(Case.VALID_DIRECTIONS)
+    "The direction must be one of these: " + ','.join(Direction.VALID)
     pass
