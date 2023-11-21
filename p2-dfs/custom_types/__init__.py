@@ -1,0 +1,1 @@
+from .adjacent_case import AdjacentCase
