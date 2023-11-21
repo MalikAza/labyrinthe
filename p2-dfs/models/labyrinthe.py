@@ -7,7 +7,7 @@ class Labyrinthe:
     BASE_COLUMN_INDEX = 0
     BASE_ROW_INDEX = 0
     
-    def __init__(self, max_index_x, max_index_y) -> None:
+    def __init__(self, max_index_x: int, max_index_y: int) -> None:
         self.max_index_x = max_index_x
         self.max_index_y = max_index_y
         self.board = [[Case() for y in range(max_index_y+1)] for x in range(max_index_x+1)]
@@ -27,7 +27,7 @@ class Labyrinthe:
         self.goal_y = y
         self.board[x][y].status = Case.STATUS_GOAL
 
-    def show(self, player) -> None:
+    def show(self, player: 'Player') -> None:
         for y in range(self.max_index_y+1):
             cases: List[CaseToShow] = []
             for x, column in enumerate(self.board):

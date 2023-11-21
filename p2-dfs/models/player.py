@@ -32,7 +32,7 @@ class Player:
             case 'W':
                 self.direction = 'S'
 
-    def adjacent_cases(self, lab) -> List['AdjacentCase']:
+    def adjacent_cases(self, lab: 'Labyrinthe') -> List['AdjacentCase']:
         if (self.y-1) < 0: north_case = Case.fake_wall().format_to_adjacent('N')
         else: north_case = lab.board[self.x][self.y-1].format_to_adjacent('N')
 
