@@ -4,6 +4,7 @@ class Case:
     STATUS_WALL = 'wall'
     STATUS_START = 'start'
     STATUS_GOAL = 'goal'
+    VALID_DIRECTIONS = ['N', 'E', 'S', 'W']
 
     def __init__(self) -> None:
         self.status = None
@@ -22,6 +23,8 @@ class Case:
                 return ' '
             
     def format_to_adjacent(self, direction: str) -> 'AdjacentCase':
+        if direction not in self.VALID_DIRECTIONS:
+            raise 'BadDirection'
         return {
             'direction': direction,
             'case': self
