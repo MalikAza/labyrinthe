@@ -1,16 +1,42 @@
+from __future__ import annotations
+
 class Case:
-    def __init__(self, x, y) -> None:
-        self.x = x
-        self.y = y
-        self.wall = False
-        self.start = False
-        self.goal = False
+    STATUS_WALL = 'wall'
+    STATUS_START = 'start'
+    STATUS_GOAL = 'goal'
 
-    def show(self, player_x: int = None, player_y: int = None) -> str:
-        if self.x == player_x and self.y == player_y: return 'J'
+    def __init__(self) -> None:
+        self.status = None
 
-        if self.wall: return 'X'
-        if self.start: return 'S'
-        if self.goal: return 'G'
+    def show(self, self_x: int, self_y: int, player_x: int, player_y: int) -> str:
+        if self_x == player_x and self_y == player_y: return 'J'
 
-        return ' '
+        match self.status:
+            case self.STATUS_WALL:
+                return 'X'
+            case self.STATUS_START:
+                return 'S'
+            case self.STATUS_GOAL:
+                return 'G'
+            case _:
+                return ' '
+            
+    def format_to_adjacent(self, direction: str) -> 'AdjacentCase':
+        return {
+            'direction': direction,
+            'case': self
+        }
+    
+    def format_to_show(self, x: int, y: int) -> 'CaseToShow':
+        return {
+            'x': x,
+            'y': y,
+            'case': self
+        }
+
+    @staticmethod
+    def fake_wall() -> Case:
+        case = Case()
+        case.status = Case.STATUS_WALL
+
+        return case

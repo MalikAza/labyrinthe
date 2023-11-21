@@ -19,6 +19,12 @@ def init_labyrinthe() -> Labyrinthe:
 def init_player(lab: Labyrinthe) -> Player:
     return Player(lab.start_x, lab.start_y)
 
+def player_move(player: Player, lab: Labyrinthe):
+    adjacent_cases = player.adjacent_cases(lab)
+    for case in adjacent_cases:
+        if case['case'].status == Case.STATUS_GOAL:
+            pass # TODO
+
 if __name__ == '__main__':
     lab = init_labyrinthe()
     player = init_player(lab)
@@ -26,6 +32,6 @@ if __name__ == '__main__':
     while player.x != lab.goal_x and player.y != lab.goal_y:
         try:
             lab.show(player)
-            input('Press Enter to continue...')
+            input('Press Enter to continue...\n')
         except KeyboardInterrupt:
             exit()

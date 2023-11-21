@@ -1,0 +1,1 @@
+from .travels import TravelDiagonaly, TravelTooFast
