@@ -1,6 +1,6 @@
 from .case import Case
 from custom_types import Coordinates
-from exceptions import *
+from exceptions import TravelTooFast, TravelDiagonaly
 
 from typing import List
 
@@ -17,6 +17,9 @@ class Player:
             raise TravelTooFast
         if y < self.y-1 or y > self.y+1:
             raise TravelTooFast
+        
+        if x != self.x and y != self.y:
+            raise TravelDiagonaly
 
         self.x = x
         self.y = y
