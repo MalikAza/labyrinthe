@@ -1,4 +1,6 @@
 from .case import Case
+from .player import Player
+
 from typing import List
 
 class Labyrinthe:
@@ -22,9 +24,11 @@ class Labyrinthe:
         self.goal_y = y
         self.board[x][y].goal = True
 
-    def show(self, player_x: int = None, player_y: int = None) -> None:
+    def show(self, player: Player) -> None:
         for i in range(self.max_y+1):
             cases = []
             for column in self.board:
                 cases.append(column[i])
-            print('|' + '|'.join([case.show(player_x, player_y) for case in cases]) + '|\n')
+            print('|' + '|'.join([case.show(player.x, player.y) for case in cases]) + '|\n')
+
+        print(f"Player steps: [{player.steps}]")

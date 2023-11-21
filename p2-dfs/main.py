@@ -1,6 +1,8 @@
 from models.labyrinthe import Labyrinthe
 from models.player import Player
 
+from sys import exit
+
 def init_labyrinthe() -> Labyrinthe:
     lab = Labyrinthe(6, 5)
 
@@ -22,4 +24,9 @@ if __name__ == '__main__':
     lab = init_labyrinthe()
     player = init_player(lab)
 
-    lab.show(player.x, player.y)
+    while player.x != lab.goal_x and player.y != lab.goal_y:
+        try:
+            lab.show(player)
+            input('Press Enter to continue...')
+        except KeyboardInterrupt:
+            exit()
