@@ -8,6 +8,18 @@ class Player:
         self.x = start_x
         self.y = start_y
         self.steps = 0
+        self.direction = 'S'
+
+    def change_direction(self):
+        match self.direction:
+            case 'S':
+                self.direction = 'E'
+            case 'E':
+                self.direction = 'N'
+            case 'N':
+                self.direction = 'W'
+            case 'W':
+                self.direction = 'S'
 
     def adjacent_cases(self, lab) -> List[AdjacentCase]:
         def fake_wall(x: int, y: int) -> Case:
