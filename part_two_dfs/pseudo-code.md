@@ -17,7 +17,7 @@ FONCTION `change de direction`
         - `Ouest`
             `Direction` DE `Joueur` EST `Sud`
 
-`Direction` DE `Jouer` EST `Sud`
+`Direction` DE `Joueur` EST `Sud`
 `Cases visitées` DE `Joueur` EST VIDE
 `Chemin` DE `Joueur` EST VIDE
 `Essais` EST `0`
