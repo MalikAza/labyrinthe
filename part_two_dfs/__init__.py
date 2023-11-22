@@ -24,7 +24,7 @@ def resolve(player: Player, lab: Labyrinthe):
                     print('Finished!')
                     print('Path: ' + ', '.join([f"({coords['x']}, {coords['y']})" for coords in player.path]))
                     print(f"Path length: {len(player.path)}")
-                    return input('Press Enter to continue...\n')
+                    return input('\nPress Enter to continue...')
             
             if forward_case['case'].status != Case.STATUS_WALL and forward_case['coordinates'] not in player.visited:
                 player.visited.append(actual_coordinates)
