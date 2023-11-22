@@ -34,7 +34,7 @@ class Labyrinthe:
                 cases.append(column[y].format_to_show(x, y))
 
             message = '|'
-            message += '|'.join([case['case'].show(case['x'], case['y'], player.x, player.y)
+            message += '|'.join([case['case'].show(case['x'], case['y'], player)
                                     for case in cases])
             message += '|'
 

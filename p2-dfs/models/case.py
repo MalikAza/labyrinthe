@@ -8,18 +8,20 @@ class Case:
     def __init__(self) -> None:
         self.status = None
 
-    def show(self, self_x: int, self_y: int, player_x: int, player_y: int) -> str:
-        if self_x == player_x and self_y == player_y: return 'J'
+    def show(self, self_x: int, self_y: int, player: 'Player') -> str:
+        if self_x == player.x and self_y == player.y: return 'J'.ljust(2, ' ').rjust(3, ' ')
 
         match self.status:
             case self.STATUS_WALL:
-                return 'X'
+                return 'X'.ljust(2, ' ').rjust(3, ' ')
             case self.STATUS_START:
-                return 'S'
+                return 'S'.ljust(2, ' ').rjust(3, ' ')
             case self.STATUS_GOAL:
-                return 'G'
+                return 'G'.ljust(2, ' ').rjust(3, ' ')
+            case None:
+                return ' '.ljust(2, ' ').rjust(3, ' ')
             case _:
-                return ' '
+                return self.status.ljust(2, ' ').rjust(3, ' ')
             
     def get_coordinates_by_direction_to_player(self, player: 'Player', direction: str) -> 'Coordinates':
         if direction not in Direction.VALID:

@@ -30,6 +30,7 @@ def resolve(player: Player, lab: Labyrinthe):
             adjacent_cases = player.adjacent_cases(lab)
             for case in adjacent_cases:
                 if case['case'].status == Case.STATUS_GOAL:
+                    lab.board[actual_coordinates['x']][actual_coordinates['y']].status = f"{player.steps}"
                     player.move_to(case['coordinates'])
                     lab.show(player)
                     print('Finished!')
@@ -42,6 +43,7 @@ def resolve(player: Player, lab: Labyrinthe):
                 player.path.append(actual_coordinates)
                 tries = 0
 
+                lab.board[actual_coordinates['x']][actual_coordinates['y']].status = f"{player.steps}"
                 player.move_to(forward_case['coordinates'])
             elif tries != 3:
                     player.change_direction()
@@ -51,6 +53,7 @@ def resolve(player: Player, lab: Labyrinthe):
                 if actual_coordinates not in player.visited:
                     player.visited.append(actual_coordinates)
 
+                lab.board[actual_coordinates['x']][actual_coordinates['y']].status = f"{player.steps}"
                 player.go_backwards()
                 tries = 0
                 
