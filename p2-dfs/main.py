@@ -1,6 +1,15 @@
 from models import *
+from exceptions import BadSortTypeArgument
 
 from sys import exit
+from argparse import ArgumentParser
+
+def __get_sort_type() -> str:
+    parser = ArgumentParser()
+    parser.add_argument('sort_type')
+    args = parser.parse_args()
+    
+    return args.sort_type
 
 def init_labyrinthe() -> Labyrinthe:
     lab = Labyrinthe(6, 5)
@@ -19,7 +28,7 @@ def init_labyrinthe() -> Labyrinthe:
 def init_player(lab: Labyrinthe) -> Player:
     return Player(lab.start_x, lab.start_y)
 
-def resolve(player: Player, lab: Labyrinthe):
+def resolve_dfs(player: Player, lab: Labyrinthe):
     tries = 0
     while player.get_coordinates() != lab.get_goal_coordinates():
         try:
@@ -60,8 +69,25 @@ def resolve(player: Player, lab: Labyrinthe):
         except KeyboardInterrupt:
             exit()
 
+def resolve_bfs(player: Player, lab: Labyrinthe) -> None:
+    while player.get_coordinates() != lab.get_goal_coordinates():
+        try:
+            exit()
+        except KeyboardInterrupt:
+            exit()
+
 if __name__ == '__main__':
+    sort_type = __get_sort_type()
+
     lab = init_labyrinthe()
     player = init_player(lab)
 
-    resolve(player, lab)
+    match sort_type:
+        case 'dfs':
+            resolve_dfs(player, lab)
+        case 'bfs':
+            resolve_bfs(player, lab)
+        case _:
+            raise BadSortTypeArgument
+
+    resolve_dfs(player, lab)
