@@ -1,7 +1,9 @@
 class TravelTooFast(Exception):
-    "Can't move more than on case at the same time."
-    pass
+    def __init__(self) -> None:
+        message = "Can't move more than on case at the same time."
+        super().__init__(message)
 
 class TravelDiagonaly(Exception):
-    "Can't move diagonaly."
-    pass
+    def __init__(self) -> None:
+        message = "Can't move diagonaly."
+        super().__init__(message)
