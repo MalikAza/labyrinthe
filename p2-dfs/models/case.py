@@ -1,5 +1,6 @@
 from __future__ import annotations
 from .direction import Direction
+from exceptions import BadDirection
 class Case:
     STATUS_WALL = 'wall'
     STATUS_START = 'start'
@@ -25,7 +26,7 @@ class Case:
             
     def get_coordinates_by_direction_to_player(self, player: 'Player', direction: str) -> 'Coordinates':
         if direction not in Direction.VALID:
-            raise 'BadDirection'
+            raise BadDirection
         
         match direction:
             case Direction.NORTH:
@@ -39,7 +40,7 @@ class Case:
     
     def format_to_adjacent(self, player: 'Player', direction: str) -> 'AdjacentCase':
         if direction not in Direction.VALID:
-            raise 'BadDirection'
+            raise BadDirection
             
         return {
             'direction': direction,
