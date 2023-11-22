@@ -8,7 +8,7 @@ class TravelsExceptionsTest(TestCase):
         self.lab = init_labyrinthe()
         self.player = init_player(self.lab)
 
-    def test_cant_move_more_than_one_case(self) -> None:
+    def test_can_not_move_more_than_one_case(self) -> None:
         coordinates_south = {
             'x': self.player.x,
             'y': self.player.y+2
@@ -31,7 +31,7 @@ class TravelsExceptionsTest(TestCase):
         self.assertRaises(TravelTooFast, self.player.move_to, coordinates_east)
         self.assertRaises(TravelTooFast, self.player.move_to, coordinates_west)
 
-    def test_cant_move_diagonaly(self) -> None:
+    def test_can_not_move_diagonaly(self) -> None:
         coordinates_top_left = {
             'x': self.player.x-1,
             'y': self.player.y+1
@@ -53,3 +53,25 @@ class TravelsExceptionsTest(TestCase):
         self.assertRaises(TravelDiagonaly, self.player.move_to, coordinates_top_right)
         self.assertRaises(TravelDiagonaly, self.player.move_to, coordinates_bottom_left)
         self.assertRaises(TravelDiagonaly, self.player.move_to, coordinates_bottom_right)
+
+    def test_can_move_more_than_one_case(self) -> None:
+        coordinates = {
+            'x': self.player.x,
+            'y': self.player.y+2
+        }
+        self.player.can_travel_fast = True
+
+        self.player.move_to(coordinates)
+        
+        self.assertEqual(coordinates, self.player.get_coordinates())
+
+    def test_can_move_diagonaly(self) -> None:
+        coordinates = {
+            'x': self.player.x+1,
+            'y': self.player.y+1
+        }
+        self.player.can_travel_fast = True
+
+        self.player.move_to(coordinates)
+        
+        self.assertEqual(coordinates, self.player.get_coordinates())
