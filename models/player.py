@@ -13,15 +13,16 @@ class Player:
         self.direction = 'S'
         self.visited : List[Coordinates] = []
         self.path : List[Coordinates] = []
+        self.can_travel_fast = False
 
     def move_to(self, coordinates: Coordinates):
         x, y = coordinates['x'], coordinates['y']
-        if x < self.x-1 or x > self.x+1:
+        if (x < self.x-1 or x > self.x+1) and not self.can_travel_fast:
             raise TravelTooFast
-        if y < self.y-1 or y > self.y+1:
+        if (y < self.y-1 or y > self.y+1) and not self.can_travel_fast:
             raise TravelTooFast
         
-        if x != self.x and y != self.y:
+        if (x != self.x and y != self.y) and not self.can_travel_fast:
             raise TravelDiagonaly
 
         self.x = x
