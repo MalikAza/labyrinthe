@@ -15,7 +15,10 @@ def resolve(player: Player, lab: Labyrinthe):
 
             for case in player.adjacent_cases(lab):
                 if case['case'].status != Case.STATUS_WALL and case['coordinates'] not in player.visited and case['coordinates'] not in player.path:
-                        player.path.append(case['coordinates'])
+                    player.path.append(case['coordinates'])
+                if case['case'].status == Case.STATUS_GOAL:
+                    player.path[-1] = case['coordinates']
+                    break
                     
             lab.board[actual_coordinates['x']][actual_coordinates['y']].status = f"{player.steps}"
             player.move_to(player.path.pop(0))
