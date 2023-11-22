@@ -4,6 +4,7 @@ from exceptions import TravelTooFast, TravelDiagonaly
 from .direction import Direction
 
 from typing import List
+from functools import cmp_to_key
 
 class Player:
     def __init__(self, start_x: int, start_y: int) -> None:
@@ -61,7 +62,37 @@ class Player:
         else: west_case = lab.board[self.x-1][self.y]
         west_case = west_case.format_to_adjacent(self, Direction.WEST)
 
-        return [north_case, south_case, east_case, west_case]
+        cases = [north_case, south_case, east_case, west_case]
+
+        def compare(a, b):
+            match a['direction']:
+                case Direction.SOUTH:
+                    if b['direction'] == Direction.SOUTH:
+                        return 0
+                    else: return -1
+                
+                case Direction.EAST:
+                    if b['direction'] == Direction.EAST:
+                        return 0
+                    elif b['direction'] == Direction.SOUTH:
+                        return 1
+                    else: return -1
+
+                case Direction.NORTH:
+                    if b['direction'] == Direction.NORTH:
+                        return 0
+                    elif b['direction'] == Direction.SOUTH or b['direction'] == Direction.EAST:
+                        return 1
+                    else: return -1
+
+                case Direction.WEST:
+                    if b['direction'] == Direction.WEST:
+                        return 0
+                    else: return 1
+
+        cases.sort(key=cmp_to_key(compare))
+
+        return cases
     
     def forward_case(self, lab: 'Labyrinthe') -> 'AdjacentCase':
         for case in self.adjacent_cases(lab):
