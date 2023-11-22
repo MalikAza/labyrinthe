@@ -1,46 +1,43 @@
-FUNCTION **Case Adjacentes** (x, y, xMax, yMax)
-    `Case Nord` = y-1 < 0 ? `Mur` : y-1, x
-    `Case Sud` = y+1 > yMax ? `Mur` : y+1, x
-    `Case Est` = x+1 > xMax ? `Mur` : y, x+1
-    `Case West` = x-1 < 0 ? `Mur` : y, x-1
-    `Cases` = `Case Nord`, `Case Sud`, `Case Est`, `Case West`
-    RETOURNE `Cases`
+FONCTION `se déplace à` (`Coordonées`)
+    `Coordonées` DE `Joueur` EST `Coordonées`
 
-FUNCTION **Prochaine Direction** (direction_actuel)
-    SI `direction_actuel` EST `Sud`
-        RETOURNE `Est`
-    SI `direction_actuel` EST `Est`
-        RETOURNE `Nord`
-    SI `direction_actuel` EST `Nord`
-        RETOURNE `West`
-    SI `direction_actuel` EST `West`
-        RETOURNE `Sud`
+FONCTION `reviens sur son chemin`
+    `Coordonées` EST `Dernière Coordonées` DE `Chemin` DE `Joueur`
+    ENLEVER `Dernière Coordonées` DE `Chemin` DE `Joueur`
+    `Joueur` **se déplace à** `Coordonées`
 
-`Direction du Joueur` EST `Sud`
-`Case visités` EST `Vide`
-`Changement de direction` EST `0`
+FONCTION `change de direction`
+    QUEL EST `Direction` DE `Joueur` ?
+        - `Sud`
+            `Direction` DE `Joueur` EST `Est`
+        - `Est`
+            `Direction` DE `Joueur` EST `Nord`
+        - `Nord`
+            `Direction` DE `Joueur` EST `Ouest`
+        - `Ouest`
+            `Direction` DE `Joueur` EST `Sud`
+
+`Direction` DE `Jouer` EST `Sud`
+`Cases visitées` DE `Joueur` EST VIDE
+`Chemin` DE `Joueur` EST VIDE
 `Essais` EST `0`
-TANT QUE `Case du Joueur` N'EST PAS `Goal`
-    `Joueur` **REGARDE** `Case directement adjacentes à Joueur`
-    POUR CHAQUE `Case adjacentes`
-        SI `Case adjacente` EST `Goal`
-            `Joueur` **SE DEPLACE À** `Case adjacente`
+TANT QUE `Coordonées du joueur` N'EST PAS `Coordonnées de case de fin`
+    POUR CHAQUE `Case` DANS `Cases adjacentes à joueur`
+        SI `Case` EST `Fin`
+            `Joueur` **se déplace à** `Coordonées` DE `Case`
             FIN
-    SI `Case adjacente` DE `Direction du Joueur` N'EST PAS `Mur` ET N'EST PAS DANS `Case visités`
-        `Case visités` += `Case actuelle du joueur`
+        SI `Direction` DE `Case` EST `Direction` DE `Joueur`
+            `Case en face de joueur` EST `Case`
+    SI `Case en face de joueur` EST `Mur` ET N'EST PAS DANS `Cases visitées` DE `Joueur`
+        AJOUT DE `Coordonées` DE `Joueur` À `Cases visitées` DE `Joueur`
+        AJOUT DE `Coordonées` DE `Joueur` À `Chemin` DE `Joueur`
         `Essais` EST `0`
-        `Joueur` **SE DEPLACE À** `Case adjacente` DE `Direction du Joueur`
+        `Joueur` **se déplace à** `Coordonées` DE `Case en face de joueur`
+    SINON SI `Essais` N'EST PAS `3`
+        `Joueur` **change de direction**
+        `Essais` += 1
     SINON
-        SI `Essais` >= 3
-            `Nouveau chemin` EST `Faux`
-            TANT QUE `Nouveau chemin` N'EST PAS `Vrai`
-                `Joueur` **SE DEPLACE À** DERNIER `Case visités`
-                `Enlever` DERNIER `Case visités`
-                `Joueur` **REGARDE** `Case directement adjacentes à Joueur`
-                POUR CHAQUE `Case adjacentes`
-                    SI `case adjacente` N'EST PAS `Mur` ET N'EST PAS DANS `Case visités`
-                        `Direction du joueur` EST `direction` DE `case adjacente`
-                        `Nouveau chemin` EST `Vrai`
-        SINON
-            `Direction du Joueur` EST **Prochaine Direction**
-            `Essais` += 1
+        SI `Coordonées` DE `Joueur` N'EST PAS DANS `Cases visitées` DE `Joueur`
+            AJOUT DE `Coordonées` DE `Joueur` À `Cases visitées` DE `Joueur`
+        `Joueur` **reviens sur son chemin**
+        `Essais` EST `0`
