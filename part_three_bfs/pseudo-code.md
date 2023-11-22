@@ -30,7 +30,7 @@ TANT QUE `Coordonées` de `Joueur` N'EST PAS `Coordonées` DE `Case de fin`
     SI `Coordonées` DE `Joueur` N'EST PAS DANS `Case visitées` DE `Joueur`
         AJOUT DE `Coordonées` DE `Joueur` DANS `Case visitées` DE `Joueur`
     POUR CHAQUE `Case` DANS `Case adjacentes` (trier) DE `Joueur`
-        SI `Case` N'EST PAS `Mur` ET `Coordonées` DE `Case` N'EST PAS DANS `Case visitées` DE `Joueur`
+        SI `Case` N'EST PAS `Mur` ET `Coordonnées` DE `Case` N'EST PAS DANS `Case visitées` DE `Joueur` ET `Coordonnées` DE `Case` N'EST PAS DANS `Chemin` DE `Joueur`
             AJOUT DE `Coordonées` DE `Case` DANS `Chemin` DE `Joueur`
     `Joueur` **se déplace à** PREMIÈRE `Coordonées` DANS `Chemin` DE `Joueur`
     RETIRE PREMIÈRE `Coordonées` DANS `Chemin` DE `Joueur`
