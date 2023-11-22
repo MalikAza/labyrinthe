@@ -26,27 +26,34 @@ def resolve(player: Player, lab: Labyrinthe):
             lab.show(player)
             input('Press Enter to continue...\n')
 
-            for case in player.adjacent_cases(lab):
+            actual_coordinates = player.get_coordinates()
+            adjacent_cases = player.adjacent_cases(lab)
+            for case in adjacent_cases:
                 if case['case'].status == Case.STATUS_GOAL:
-                    return player.move_to_direction(case['direction'])
+                    player.move_to(case['coordinates'])
+                    lab.show(player)
+                    print('Finished!')
+                    return input('Press Enter to continue...\n')
                 if case['direction'] == player.direction:
-                    player_direction_case = case
+                    forward_case = case
             
-            if player_direction_case['case'].status != Case.STATUS_WALL and player.get_coordinates_from_direction(player.direction) not in player.stack:
+            if forward_case['case'].status != Case.STATUS_WALL and forward_case['coordinates'] not in player.visited:
+                player.visited.append(actual_coordinates)
+                player.path.append(actual_coordinates)
                 tries = 0
-                player.move_to_direction(player.direction)
-            else:
-                if tries >= 3:
-                    new_path = False
-                    while new_path != True:
-                        player.go_backwards()
-                        for case in player.adjacent_cases(lab):
-                            if case['case'].status != Case.STATUS_WALL and player.get_coordinates_from_direction(player.direction) not in player.stack:
-                                player.direction = case['direction']
-                                new_path = True
-                else:
+
+                player.move_to(forward_case['coordinates'])
+            elif tries != 3:
                     player.change_direction()
+
                     tries += 1
+            else:
+                if actual_coordinates not in player.visited:
+                    player.visited.append(actual_coordinates)
+
+                player.go_backwards()
+                tries = 0
+                
         except KeyboardInterrupt:
             exit()
 

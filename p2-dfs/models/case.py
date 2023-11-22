@@ -21,12 +21,28 @@ class Case:
             case _:
                 return ' '
             
-    def format_to_adjacent(self, direction: str) -> 'AdjacentCase':
+    def get_coordinates_by_direction_to_player(self, player: 'Player', direction: str) -> 'Coordinates':
         if direction not in Direction.VALID:
             raise 'BadDirection'
+        
+        match direction:
+            case Direction.NORTH:
+                return {'x': player.x, 'y': player.y-1}
+            case Direction.SOUTH:
+                return {'x': player.x, 'y': player.y+1}
+            case Direction.WEST:
+                return {'x': player.x-1, 'y': player.y}
+            case Direction.EAST:
+                return {'x': player.x+1, 'y': player.y}
+    
+    def format_to_adjacent(self, player: 'Player', direction: str) -> 'AdjacentCase':
+        if direction not in Direction.VALID:
+            raise 'BadDirection'
+            
         return {
             'direction': direction,
-            'case': self
+            'case': self,
+            'coordinates': self.get_coordinates_by_direction_to_player(player, direction)
         }
     
     def format_to_show(self, x: int, y: int) -> 'CaseToShow':
