@@ -62,6 +62,11 @@ class Player:
 
         return [north_case, south_case, east_case, west_case]
     
+    def forward_case(self, lab: 'Labyrinthe') -> 'AdjacentCase':
+        for case in self.adjacent_cases(lab):
+            if (case['direction']) == self.direction:
+                return case
+
     def get_coordinates(self) -> Coordinates:
         return {
             'x': self.x,

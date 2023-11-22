@@ -10,6 +10,7 @@ def resolve(player: Player, lab: Labyrinthe):
             input('Press Enter to continue...\n')
 
             actual_coordinates = player.get_coordinates()
+            forward_case = player.forward_case(lab)
             adjacent_cases = player.adjacent_cases(lab)
             for case in adjacent_cases:
                 if case['case'].status == Case.STATUS_GOAL:
@@ -18,8 +19,6 @@ def resolve(player: Player, lab: Labyrinthe):
                     lab.show(player)
                     print('Finished!')
                     return input('Press Enter to continue...\n')
-                if case['direction'] == player.direction:
-                    forward_case = case
             
             if forward_case['case'].status != Case.STATUS_WALL and forward_case['coordinates'] not in player.visited:
                 player.visited.append(actual_coordinates)
