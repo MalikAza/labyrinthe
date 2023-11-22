@@ -28,7 +28,7 @@ TANT QUE `Coordonées du joueur` N'EST PAS `Coordonnées de case de fin`
             FIN
         SI `Direction` DE `Case` EST `Direction` DE `Joueur`
             `Case en face de joueur` EST `Case`
-    SI `Case en face de joueur` EST `Mur` ET N'EST PAS DANS `Cases visitées` DE `Joueur`
+    SI `Case en face de joueur` N'EST PAS `Mur` ET N'EST PAS DANS `Cases visitées` DE `Joueur`
         AJOUT DE `Coordonées` DE `Joueur` À `Cases visitées` DE `Joueur`
         AJOUT DE `Coordonées` DE `Joueur` À `Chemin` DE `Joueur`
         `Essais` EST `0`
