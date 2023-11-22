@@ -15,9 +15,14 @@ def resolve(player: Player, lab: Labyrinthe):
             for case in adjacent_cases:
                 if case['case'].status == Case.STATUS_GOAL:
                     lab.board[actual_coordinates['x']][actual_coordinates['y']].status = f"{player.steps}"
+
+                    player.path.append(actual_coordinates)
                     player.move_to(case['coordinates'])
+                    player.path.append(player.get_coordinates())
+                
                     lab.show(player)
                     print('Finished!')
+                    print('Path: ' + ', '.join([f"({coords['x']}, {coords['y']})" for coords in player.path]))
                     return input('Press Enter to continue...\n')
             
             if forward_case['case'].status != Case.STATUS_WALL and forward_case['coordinates'] not in player.visited:
