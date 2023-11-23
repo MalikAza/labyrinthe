@@ -11,7 +11,6 @@ class Player:
         self.x = start_x
         self.y = start_y
         self.steps = 0
-        self.direction = 'S'
         self.visited : List[Coordinates] = []
         self.path : List[Coordinates] = []
         self.can_travel_fast = False
@@ -33,17 +32,6 @@ class Player:
     def go_backwards(self):
         coordinates = self.path.pop()
         self.move_to(coordinates)
-
-    def change_direction(self):
-        match self.direction:
-            case Direction.SOUTH:
-                self.direction = Direction.EAST
-            case Direction.EAST:
-                self.direction = Direction.NORTH
-            case Direction.NORTH:
-                self.direction = Direction.WEST
-            case Direction.WEST:
-                self.direction = Direction.SOUTH
 
     def adjacent_cases(self, lab: 'Labyrinthe') -> List['AdjacentCase']:
         if (self.y-1) < 0: north_case = Case.fake_wall()
@@ -93,11 +81,6 @@ class Player:
         cases.sort(key=cmp_to_key(compare))
 
         return cases
-    
-    def forward_case(self, lab: 'Labyrinthe') -> 'AdjacentCase':
-        for case in self.adjacent_cases(lab):
-            if (case['direction']) == self.direction:
-                return case
 
     def get_coordinates(self) -> Coordinates:
         return {
