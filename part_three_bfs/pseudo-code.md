@@ -1,22 +1,6 @@
 FONCTION `se déplace à` (`Coordonées`)
     `Coordonées` DE `Joueur` EST `Coordonées`
 
-FONCTION `change de direction`
-    QUEL EST `Direction` DE `Joueur` ?
-        - `Sud`
-            `Direction` DE `Joueur` EST `Est`
-        - `Est`
-            `Direction` DE `Joueur` EST `Nord`
-        - `Nord`
-            `Direction` DE `Joueur` EST `Ouest`
-        - `Ouest`
-            `Direction` DE `Joueur` EST `Sud`
-
-FONCTION `regarde case en face`
-    POUR CHAQUE `Case` DANS `Case adjacentes` DE `Joueur`
-        SI `Direction` DE `Case` EST `Direction` DE `Joueur`
-            RETOURNE `Case`
-
 // Tri des `Cases adjacentes`
     1- Sud
     2- Est
