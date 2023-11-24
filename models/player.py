@@ -13,6 +13,7 @@ class Player:
         self.steps = 0
         self.visited : List[Coordinates] = []
         self.path : List[Coordinates] = []
+        self.branches = []
         self.can_travel_fast = False
 
     def move_to(self, coordinates: Coordinates):
