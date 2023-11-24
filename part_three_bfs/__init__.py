@@ -7,11 +7,12 @@ from typing import List
 
 def resolve(player: Player, lab: Labyrinthe):
     player.can_travel_fast = True
-    while actual_coordinates := player.get_coordinates() != lab.get_goal_coordinates():
+    while player.get_coordinates() != lab.get_goal_coordinates():
         try:
             lab.show(player)
             input('Press Enter to continue...\n')
 
+            actual_coordinates = player.get_coordinates()
             if actual_coordinates not in player.visited:
                 player.visited.append(actual_coordinates)
 
