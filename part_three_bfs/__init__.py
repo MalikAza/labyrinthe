@@ -41,6 +41,7 @@ def resolve(player: Player, lab: Labyrinthe):
             player.move_to(coord)
 
     lab.show(player)
-    print('Path: ' + ', '.join([f"({coord['x']}, {coord['y']})" for coord in fast_path[::-1]]))
     print('Finished!')
+    print('Path: ' + ', '.join([f"({coord['x']}, {coord['y']})" for coord in fast_path[::-1]]))
+    print(f"Path length: {len(fast_path)}\n")
     input('Press Enter to continue...\n')
